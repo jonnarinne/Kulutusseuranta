@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Uusi kulu</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Lisää kuluja</h1>
+	<div>
+		<form action="#" th:object="${expense}" th:action="@{saveExpense}"
+			method="post">
+			<div>
+				<label>Nimi</label> <input type="text" th:field="*{name}" />
+			</div>
+
+			<div>
+				<label>Summa</label> <input type="text" th:field="*{amount}" />
+			</div>
+
+            <div>
+				<label>Päivämäärä</label> <input type="text" th:field="*{date}" />
+			</div>
+
+            <div>
+				<label>Ostopaikka</label> <input type="text" th:field="*{location}" />
+			</div>
+
+
+			<label for="categorylist">Kategoria</label>
+			 <select id="categorylist" th:field="*{category}" class="form-control">
+       			<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
+    		</select>
+
+			<input type="submit" value="Tallenna"></input>
+		</form>
+
+	</div>
+
+
+</body>
+</html>

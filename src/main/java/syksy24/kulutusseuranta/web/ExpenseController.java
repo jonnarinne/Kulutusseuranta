@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 import syksy24.kulutusseuranta.domain.Expense;
-import syksy24.kulutusseuranta.domain.Category;
 import syksy24.kulutusseuranta.domain.CategoryRepository;
 import syksy24.kulutusseuranta.domain.ExpenseRepository;
 
@@ -35,6 +34,49 @@ public class ExpenseController {
         return "login";
     }
 
-    
+    // Näytetään kaikki kulut
+    @GetMapping("/report")
+	public String showReport(Model model) {
+		log.info("Read expenses from database..");
+		model.addAttribute("expenses", expenseRepository.findAll());
+		return "report";
+	}
+
+	// Lisätään kulu 
+	@PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/add")
+	public String addExpense(Model model) {
+		log.info("Lets go to create an expense....");
+		model.addAttribute("expense", new Expense());
+		model.addAttribute("categories", crepository.findAll());
+		return "add";
+	}
+
+	// Tallennetaan uusi tai muokattu kulu
+	@PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/saveExpense")
+	public String saveExpense(@ModelAttribute("expense") Expense expense) {
+		expenseRepository.save(expense);
+		return "redirect:expense";
+	}
+
+	// Poistetaan kulu
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("delete/{id}")
+	public String deleteExpense(@PathVariable("id") Long id, Model model) {
+		log.info("delete expense " + id);
+		expenseRepository.deleteById(id);
+		return "redirect:/report";
+	}
+
+	// Muokataan kulua
+	@PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("edit/{id}")
+	public String editExpense(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("editexpense", expenseRepository.findById(id));
+		model.addAttribute("categories", crepository.findAll());
+		return "edit";
+	}
     
 }
+
