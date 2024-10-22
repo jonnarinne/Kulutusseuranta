@@ -27,6 +27,7 @@ public class WebSecurityConfig {
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests(authorize -> authorize
+				.requestMatchers("/restreport").permitAll()
 				.requestMatchers(antMatcher("/css/**")).permitAll()
 				.requestMatchers("/home/**", "/add").hasAnyRole("ADMIN", "USER")
 				.requestMatchers("/saveExpense", "/delete/**", "/edit/**", "/report").hasRole("ADMIN")

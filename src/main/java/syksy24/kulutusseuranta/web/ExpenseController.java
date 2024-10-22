@@ -86,7 +86,7 @@ public class ExpenseController {
 	@PreAuthorize("hasRole('ADMIN')")
     @GetMapping("edit/{id}")
 	public String editExpense(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("editexpense", expenseRepository.findById(id));
+		model.addAttribute("expense", expenseRepository.findById(id));
 		model.addAttribute("categories", crepository.findAll());
 		return "edit";
 	}
