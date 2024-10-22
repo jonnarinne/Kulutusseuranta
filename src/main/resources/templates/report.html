@@ -1,8 +1,45 @@
-// Näytetään raportteja aikavälin mukaan, kategorian mukaan, ostoksen/kulun
-summan mukaan.
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Books</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container">
+	<div class="col-md-4">
+			<h1>Kulut</h1>
+	</div>
+	<div class="col-md-4">
+	<span  sec:authentication="name">Name</span>
+	</div>
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
 
-// Peruskäyttäjä näkee vain oman raporttinsa, admin voi tarkastella sekä peruskäyttäjän1
-että peruskäyttäjän2 raportteja.
+	<table class="table table-striped">
+	<tr>
+		<th>Nimi</th>
+		<th>Summa</th>
+		<th>Päivämäärä</th>
+        <th>Ostopaikka</th>
+		<th>Kategoria</th>
+	</tr>
+	<tr th:each="expense : ${expenses}">
+		<td th:text="${expense.name}"></td>
+		<td th:text="${expense.amount}"></td>
+		<td th:text="${expense.date}"></td>
+        <td th:text="${expense.location}"></td>
+		<td th:text="${expense.category.name}"></td>
 
-// Admin voi poistaa ja muokata raportteja, peruskäyttäjät voivat vain nähdä ja lisätä kuluja
-omiin raportteihinsa.
+		<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/expense/delete/{id}(id=${expense.id})}" class="btn btn-danger">Delete</a></td>
+		<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/expense/edit/{id}(id=${expense.id})}" class="btn btn-secondary">Edit</a></td>
+	</tr>
+</table>
+		<div sec:authorize="hasAnyRole('ADMIN', 'USER')">
+    		<a href="/add" class="btn btn-primary">Lisää kulu</a>
+		</div>
+</body>
+</html>

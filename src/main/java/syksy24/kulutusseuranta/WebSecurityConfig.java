@@ -28,7 +28,8 @@ public class WebSecurityConfig {
 		http
 			.authorizeHttpRequests(authorize -> authorize
 				.requestMatchers(antMatcher("/css/**")).permitAll()
-				.requestMatchers("/home/**").hasRole("ADMIN") // Vain admin voi käyttää näitä
+				.requestMatchers("/home/**", "/add").hasAnyRole("ADMIN", "USER")
+				.requestMatchers("/saveExpense", "/delete/**", "/edit/**", "/report").hasRole("ADMIN")
 				.anyRequest().authenticated()
 			).formLogin(formlogin -> formlogin
 				.loginPage("/login")

@@ -7,7 +7,7 @@
 <body>
 	<h1>Lisää kuluja</h1>
 	<div>
-		<form action="#" th:object="${expense}" th:action="@{saveExpense}"
+		<form action="#" th:object="${expense}" th:action="@{/saveAdd}"
 			method="post">
 			<div>
 				<label>Nimi</label> <input type="text" th:field="*{name}" />
@@ -35,6 +35,11 @@
 		</form>
 
 	</div>
+
+	 <!-- Linkki takaisin etusivulle -->
+	 <div>
+        <a th:href="@{/home}">Takaisin etusivulle</a>
+    </div>
 
 
 </body>

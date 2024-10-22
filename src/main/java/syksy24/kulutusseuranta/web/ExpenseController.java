@@ -37,13 +37,18 @@ public class ExpenseController {
     // Näytetään kaikki kulut
     @GetMapping("/report")
 	public String showReport(Model model) {
-		log.info("Read expenses from database..");
 		model.addAttribute("expenses", expenseRepository.findAll());
-		return "report";
+    	return "report";
 	}
 
-	// Lisätään kulu 
-	@PreAuthorize("hasRole('ADMIN')")
+	// Ohjaus etusivulle kirjautumisen jälkeen
+	@GetMapping("/home")
+	public String showHome(Model model) {
+    	return "home";
+	}
+
+	// Lisätään kulu
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/add")
 	public String addExpense(Model model) {
 		log.info("Lets go to create an expense....");
@@ -52,12 +57,20 @@ public class ExpenseController {
 		return "add";
 	}
 
-	// Tallennetaan uusi tai muokattu kulu
-	@PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/saveExpense")
-	public String saveExpense(@ModelAttribute("expense") Expense expense) {
+	// Tallennetaan uusi kulu
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PostMapping("/saveAdd")
+	public String saveAdd(@ModelAttribute("expense") Expense expense) {
 		expenseRepository.save(expense);
-		return "redirect:expense";
+		return "redirect:report";
+	}
+
+	// Tallennetaan muokattu kulu
+	@PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/saveEdit")
+	public String saveEdit(@ModelAttribute("expense") Expense expense) {
+		expenseRepository.save(expense);
+		return "redirect:report";
 	}
 
 	// Poistetaan kulu

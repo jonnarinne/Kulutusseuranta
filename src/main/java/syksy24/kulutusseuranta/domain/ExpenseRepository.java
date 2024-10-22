@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ExpenseRepository extends CrudRepository<Expense, Long> {
 
-    List<Expense> findByTitle(String title);
+    List<Expense> findByName(String name);
 
     
 }
