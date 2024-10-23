@@ -9,6 +9,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Category {
@@ -22,6 +24,7 @@ public class Category {
 	private String name;
 
 	@OneToMany(mappedBy = "category") // Tämä kertoo, että tämä on monelle-toiseen suhde Expense-luokassa
+	@JsonIgnore
     private List<Expense> expenses; // Lista kuluista, jotka kuuluvat tähän kategoriaan
 	
 	public Category() {}

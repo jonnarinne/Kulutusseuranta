@@ -28,7 +28,7 @@ public class RestExpenseController {
     CategoryRepository categoryRepository;
 
     // REST: Näytetään kaikki kulut
-    @GetMapping("/restreport")
+    @GetMapping("/expenses")
     public Iterable<Expense> getExpenses() {
         log.info("fetch expenses from db and return to client as json");
         return expenseRepository.findAll();
@@ -42,7 +42,7 @@ public class RestExpenseController {
     }
 
     // REST: Lisätään uusi kulu
-    @PostMapping("/add")
+    @PostMapping("/expense")
 	Expense addExpense(@RequestBody Expense addExpense) {
 		log.info("save a new expense " + addExpense);
 		return expenseRepository.save(addExpense);
