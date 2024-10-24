@@ -48,8 +48,8 @@ public class KulutusseurantaApplication {
             expenseRepository.save(new Expense("Harrastukset", 30.0, LocalDate.now(), "Cinema", hobbies));
 
             // Luodaan esimerkkikäyttäjiä
-            AppUser user1 = new AppUser("user", "$2a$10$GCNSYY8Rs9zV0YL0lainN.XBKOlq8/nB4Sf/voyCWKPzgSVupKIiW", "appuser@appuser.com", "USER");
-            AppUser user2 = new AppUser("admin", "$2a$10$Oj9Tv75nMXoHQzwxTo1Tseuxf0jwEVkykBFQ6BfI6Ny75GAj0sOjq", "admin@admin.com", "ADMIN");
+            AppUser user1 = new AppUser("user", "$2a$10$GCNSYY8Rs9zV0YL0lainN.XBKOlq8/nB4Sf/voyCWKPzgSVupKIiW", "appuser@appuser.com", "ROLE_USER");
+            AppUser user2 = new AppUser("admin", "$2a$10$Oj9Tv75nMXoHQzwxTo1Tseuxf0jwEVkykBFQ6BfI6Ny75GAj0sOjq", "admin@admin.com", "ROLE_ADMIN");
 
             userRepository.save(user1);
             userRepository.save(user2);

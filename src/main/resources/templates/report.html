@@ -1,45 +1,86 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Books</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <title>Kulut</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <style>
+        .top-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px; /* Välit painikkeiden välille */
+        }
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            text-align: center; /* Keskitetään sisältö */
+            padding: 10px;
+            border: 1px solid #dee2e6; /* Selkeämmät reunaviivat */
+        }
+        th {
+            background-color: #f8f9fa; /* Otsikoiden vaalea tausta */
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* Parittomien rivien taustaväri */
+        }
+        tr:hover {
+            background-color: #e9ecef; /* Rivien korostus hover-efektillä */
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-	<div class="col-md-4">
-			<h1>Kulut</h1>
-	</div>
-	<div class="col-md-4">
-	<span  sec:authentication="name">Name</span>
-	</div>
-	<div class="col-md-4" style="padding:20px 0">
-		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
-		</form>
-	</div>
+    <!-- Etusivu, Lisää kulu ja Kirjaudu ulos -painikkeet -->
+    <div class="top-buttons">
+        <a th:href="@{/home}" class="btn btn-primary">Etusivu</a> <!-- Etusivu-painike -->
+        <a th:href="@{/add}" class="btn btn-success">Lisää kulu</a> <!-- Lisää kulu -painike -->
+        <form th:action="@{/logout}" method="post" class="d-inline">
+            <button type="submit" class="btn btn-danger">Kirjaudu ulos</button>
+        </form>
+    </div>
 
-	<table class="table table-striped">
-	<tr>
-		<th>Nimi</th>
-		<th>Summa</th>
-		<th>Päivämäärä</th>
-        <th>Ostopaikka</th>
-		<th>Kategoria</th>
-	</tr>
-	<tr th:each="expense : ${expenses}">
-		<td th:text="${expense.name}"></td>
-		<td th:text="${expense.amount}"></td>
-		<td th:text="${expense.date}"></td>
-        <td th:text="${expense.location}"></td>
-		<td th:text="${expense.category.name}"></td>
+    <div class="container">
+        <h1>Kulut</h1>
 
-		<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/delete/{id}(id=${expense.id})}" class="btn btn-danger">Delete</a></td>
-		<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/edit/{id}(id=${expense.id})}" class="btn btn-secondary">Edit</a></td>
-	</tr>
-</table>
-		<div sec:authorize="hasAnyRole('ADMIN', 'USER')">
-    		<a href="/add" class="btn btn-primary">Lisää kulu</a>
-		</div>
+        <table class="table table-striped table-bordered"> <!-- Lisätty 'table-bordered' -->
+            <thead>
+                <tr>
+                    <th>Nimi</th>
+                    <th>Summa</th>
+                    <th>Päivämäärä</th>
+                    <th>Ostopaikka</th>
+                    <th>Kategoria</th>
+                    <th>Toiminnot</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="expense : ${expenses}">
+                    <td th:text="${expense.name}"></td>
+                    <td th:text="${expense.amount}"></td>
+                    <td th:text="${expense.date}"></td>
+                    <td th:text="${expense.location}"></td>
+                    <td th:text="${expense.category.name}"></td>
+
+                    <td sec:authorize="hasRole('ADMIN')">
+                        <a th:href="@{/delete/{id}(id=${expense.id})}" class="btn btn-danger btn-sm">Poista</a>
+                        <a th:href="@{/edit/{id}(id=${expense.id})}" class="btn btn-secondary btn-sm">Muokkaa</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

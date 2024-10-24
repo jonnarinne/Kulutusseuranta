@@ -43,7 +43,7 @@ public class ExpenseController {
 
 	// Ohjaus etusivulle kirjautumisen jälkeen
 	@GetMapping("/home")
-	public String showHome(Model model) {
+	public String showHome() {
     	return "home";
 	}
 

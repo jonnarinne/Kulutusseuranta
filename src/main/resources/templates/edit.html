@@ -3,40 +3,76 @@
 <head>
     <title>Muokkaa</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap-tuki -->
+    <style>
+        body {
+            background-color: #f8f9fa; /* Vaaleanharmaa tausta */
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Keskitetään sisältö */
+        }
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+    </style>
 </head>
 <body>
-	<h1>Muokkaa kuluja</h1>
-	<div>
-	<form th:object="${expense}" th:action="@{/saveEdit}" action="#" method="post">
-		  	<input type="hidden" id="id" th:field="*{id}" />
-		  	<div>
-		  	    <label>Nimi</label>
-			    <input type="text" th:field="*{name}" />
-			</div>
-			<div>
-		  	    <label>Summa</label>
-		  	    <input type="text" th:field="*{amount}" />
-			</div>
-            <div>
-                <label>Päivämäärä</label>
-                <input type="text" th:field="*{date}" />
-            </div>
-            <div>
-                <label>Paikka</label>
-                <input type="text" th:field="*{location}" />
-            </div>
-            
 
-			<label for="categorylist">Category</label>
-			 <select id="categorylist" th:field="*{category}" class="form-control">
-       			<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
-    		</select>
-						
-			<input type="submit" value="Tallenna"></input>
-		</form>
-	
-	</div>
+    <div class="container">
+        <header>
+            <h1>Muokkaa kuluja</h1>
+        </header>
 
- 	
+        <div class="mb-4"> <!-- Lomake kuluja varten -->
+            <form th:object="${expense}" th:action="@{/saveEdit}" method="post">
+                <input type="hidden" id="id" th:field="*{id}" />
+                
+                <div class="form-group">
+                    <label>Nimi</label>
+                    <input type="text" th:field="*{name}" class="form-control" />
+                </div>
+                
+                <div class="form-group">
+                    <label>Summa</label>
+                    <input type="text" th:field="*{amount}" class="form-control" />
+                </div>
+                
+                <div class="form-group">
+                    <label>Päivämäärä</label>
+                    <input type="text" th:field="*{date}" class="form-control" />
+                </div>
+                
+                <div class="form-group">
+                    <label>Paikka</label>
+                    <input type="text" th:field="*{location}" class="form-control" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="categorylist">Kategoria</label>
+                    <select id="categorylist" th:field="*{category}" class="form-control">
+                        <option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
+                    </select>
+                </div>
+                
+                <input type="submit" value="Tallenna" class="btn btn-primary"></input>
+            </form>
+        </div>
+    </div>
+
+    <div class="logout-button"> <!-- Kirjaudu ulos -painike -->
+        <form th:action="@{/logout}" method="post" class="d-inline">
+            <button type="submit" class="btn btn-danger">Kirjaudu ulos</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Bootstrap JS -->
 </body>
 </html>

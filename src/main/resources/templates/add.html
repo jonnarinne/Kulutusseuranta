@@ -1,46 +1,77 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Uusi kulu</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Uusi kulu</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap-tuki -->
+    <style>
+        body {
+            background-color: #f8f9fa; /* Vaaleanharmaa tausta */
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 600px; /* Rajoitetaan containerin leveyttä */
+        }
+        h1 {
+            margin-bottom: 30px;
+            text-align: center; /* Keskitetään otsikko */
+        }
+        .top-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px; /* Välit painikkeiden väliin */
+        }
+    </style>
 </head>
 <body>
-	<h1>Lisää kuluja</h1>
-	<div>
-		<form action="#" th:object="${expense}" th:action="@{/saveAdd}"
-			method="post">
-			<div>
-				<label>Nimi</label> <input type="text" th:field="*{name}" />
-			</div>
-
-			<div>
-				<label>Summa</label> <input type="text" th:field="*{amount}" />
-			</div>
-
-            <div>
-				<label>Päivämäärä</label> <input type="text" th:field="*{date}" />
-			</div>
-
-            <div>
-				<label>Ostopaikka</label> <input type="text" th:field="*{location}" />
-			</div>
-
-
-			<label for="categorylist">Kategoria</label>
-			 <select id="categorylist" th:field="*{category}" class="form-control">
-       			<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
-    		</select>
-
-			<input type="submit" value="Tallenna"></input>
-		</form>
-
-	</div>
-
-	 <!-- Linkki takaisin etusivulle -->
-	 <div>
-        <a th:href="@{/home}">Takaisin etusivulle</a>
+    <!-- Etusivu ja Kirjaudu ulos -painikkeet -->
+    <div class="top-buttons">
+        <a th:href="@{/home}" class="btn btn-primary">Etusivu</a> <!-- Etusivu-painike -->
+        <form th:action="@{/logout}" method="post" class="d-inline">
+            <button type="submit" class="btn btn-danger">Kirjaudu ulos</button>
+        </form>
     </div>
 
+    <div class="container">
+        <h1>Lisää kuluja</h1>
+        <form th:object="${expense}" th:action="@{/saveAdd}" method="post">
+            <div class="form-group">
+                <label for="name">Nimi</label>
+                <input type="text" th:field="*{name}" class="form-control" id="name" required />
+            </div>
 
+            <div class="form-group">
+                <label for="amount">Summa</label>
+                <input type="number" th:field="*{amount}" class="form-control" id="amount" required step="0.01" />
+            </div>
+
+            <div class="form-group">
+                <label for="date">Päivämäärä</label>
+                <input type="date" th:field="*{date}" class="form-control" id="date" required />
+            </div>
+
+            <div class="form-group">
+                <label for="location">Ostopaikka</label>
+                <input type="text" th:field="*{location}" class="form-control" id="location" required />
+            </div>
+
+            <div class="form-group">
+                <label for="categorylist">Kategoria</label>
+                <select id="categorylist" th:field="*{category}" class="form-control" required>
+                    <option value="" disabled selected>Valitse kategoria</option> <!-- Oletusviesti -->
+                    <option th:each="category : ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Tallenna</button> <!-- Bootstrap painike -->
+        </form>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Bootstrap JS -->
 </body>
 </html>
