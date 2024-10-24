@@ -46,17 +46,17 @@ public class UserController {
 		    	AppUser newUser = new AppUser();
 		    	newUser.setPasswordHash(hashPwd);
 		    	newUser.setUsername(signupForm.getUsername());
-		    	newUser.setRole("USER");
+		    	newUser.setRole("ROLE_USER");
 		    	if (repository.findByUsername(signupForm.getUsername()) == null) { // Check if user exists
 		    		repository.save(newUser);
 		    	}
 		    	else {
-	    			bindingResult.rejectValue("username", "err.username", "Username already exists");    	
+	    			bindingResult.rejectValue("username", "err.username", "Käyttäjätunnus on jo käytössä");    	
 	    			return "signup";		    		
 		    	}
     		}
     		else {
-    			bindingResult.rejectValue("passwordCheck", "err.passCheck", "Passwords does not match");    	
+    			bindingResult.rejectValue("passwordCheck", "err.passCheck", "Salasanat eivät täsmää");    	
     			return "signup";
     		}
     	}
