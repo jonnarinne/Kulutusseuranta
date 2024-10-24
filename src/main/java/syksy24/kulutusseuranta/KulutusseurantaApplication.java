@@ -32,22 +32,38 @@ public class KulutusseurantaApplication {
         return (args) -> {
             log.info("Creating sample categories");
 
-            // Luodaan esimerkkikategorioita
             Category food = new Category("Ruoka");
             Category rent = new Category("Vuokra");
             Category hobbies = new Category("Harrastukset");
+            Category insurances = new Category("Vakuutukset");
+            Category travelling = new Category("Matkustaminen");
+            Category decorating = new Category("Sisustaminen");
+            Category freetime = new Category("Viihde ja vapaa-aika");
+
 
             categoryRepository.save(food);
             categoryRepository.save(rent);
             categoryRepository.save(hobbies);
+            categoryRepository.save(insurances);
+            categoryRepository.save(travelling);
+            categoryRepository.save(decorating);
+            categoryRepository.save(freetime);
+
 
             log.info("Saving sample expenses");
-            // Luodaan esimerkkikuluja
-            expenseRepository.save(new Expense("Ruoka", 50.0, LocalDate.now(), "Supermarket", food));
-            expenseRepository.save(new Expense("Vuokra", 800.0, LocalDate.now(), "Apartment", rent));
-            expenseRepository.save(new Expense("Harrastukset", 30.0, LocalDate.now(), "Cinema", hobbies));
+            expenseRepository.save(new Expense("Viikon ruokaostokset", 50.0, LocalDate.now(), "Prisma", food));
+            expenseRepository.save(new Expense("Vuokra", 800.0, LocalDate.now(), "-", rent));
+            expenseRepository.save(new Expense("Kuntosali", 30.0, LocalDate.now(), "Elixia", hobbies));
+            expenseRepository.save(new Expense("Elokuvalippu", 15.0, LocalDate.now(), "Finnkino", hobbies));
+            expenseRepository.save(new Expense("Uusi sohva", 600.0, LocalDate.now(), "IKEA", decorating));
+            expenseRepository.save(new Expense("Junalippu Tampereelle", 15.0, LocalDate.now(), "VR", travelling));
+            expenseRepository.save(new Expense("Konserttilippu", 49.90, LocalDate.now(), "Ticketmaster", freetime));
+            expenseRepository.save(new Expense("Junalippu Helsinkiin", 22.0, LocalDate.now(), "VR", travelling));
+            expenseRepository.save(new Expense("Välipalaostoksia", 4.95, LocalDate.now(), "Alepa", food));
+            expenseRepository.save(new Expense("Käynti uimahallissa", 5.0, LocalDate.now(), "VR", freetime));
 
-            // Luodaan esimerkkikäyttäjiä
+
+
             AppUser user1 = new AppUser("user", "$2a$10$GCNSYY8Rs9zV0YL0lainN.XBKOlq8/nB4Sf/voyCWKPzgSVupKIiW", "appuser@appuser.com", "ROLE_USER");
             AppUser user2 = new AppUser("admin", "$2a$10$Oj9Tv75nMXoHQzwxTo1Tseuxf0jwEVkykBFQ6BfI6Ny75GAj0sOjq", "admin@admin.com", "ROLE_ADMIN");
 

@@ -28,6 +28,7 @@ public class WebSecurityConfig {
         // Määritellään, mitkä pyynnöt ovat sallittuja
         .authorizeHttpRequests(authorize -> authorize
 			.requestMatchers(antMatcher("/h2-console/**")).permitAll() // H2-konsolille vapaa pääsy
+            .requestMatchers("/css/**").permitAll() // Salli CSS
 			.requestMatchers("/signup").permitAll() // Vapaa pääsy rekisteröitymissivulle
 			.requestMatchers("/saveuser").permitAll() // Vapaa pääsy käyttäjän tallentamiseen
 			.requestMatchers("/add").hasAnyRole("USER", "ADMIN") // Sekä admin että user voivat käyttää /add-polkua
