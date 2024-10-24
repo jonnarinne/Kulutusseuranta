@@ -11,6 +11,10 @@
         .container {
             margin-top: 50px;
             max-width: 600px; /* Rajoitetaan containerin leveyttä */
+            background-color: #ffffff; /* Valkoinen laatikko tekstikenttien taustalle */
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Kevyt varjo laatikolle */
+            border-radius: 8px; /* Pyöristetyt kulmat */
         }
         h1 {
             margin-bottom: 30px;
@@ -22,6 +26,10 @@
             right: 20px;
             display: flex;
             gap: 10px; /* Välit painikkeiden väliin */
+        }
+        .btn-small {
+            padding: 5px 10px; /* Pienempi painike */
+            font-size: 14px;
         }
     </style>
 </head>
@@ -65,7 +73,7 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block">Tallenna</button> <!-- Bootstrap painike -->
+            <button type="submit" class="btn btn-primary btn-small">Tallenna</button> <!-- Pienennetty tallenna-painike -->
         </form>
 
     </div>
@@ -75,3 +83,4 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Bootstrap JS -->
 </body>
 </html>
+

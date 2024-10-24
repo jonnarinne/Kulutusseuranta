@@ -9,16 +9,27 @@
             background-color: #f8f9fa; /* Vaaleanharmaa tausta */
         }
         .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Keskitetään sisältö */
+            margin-top: 50px;
+            max-width: 600px; /* Rajoitetaan containerin leveyttä */
+            background-color: #ffffff; /* Valkoinen laatikko tekstikenttien taustalle */
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Kevyt varjo laatikolle */
+            border-radius: 8px; /* Pyöristetyt kulmat */
         }
-        .logout-button {
+        h1 {
+            margin-bottom: 30px;
+            text-align: center; /* Keskitetään otsikko */
+        }
+        .top-buttons {
             position: absolute;
             top: 20px;
             right: 20px;
+            display: flex;
+            gap: 10px; /* Välit painikkeiden väliin */
+        }
+        .btn-small {
+            padding: 5px 10px; /* Pienempi painike */
+            font-size: 14px;
         }
     </style>
 </head>
@@ -60,12 +71,14 @@
                     </select>
                 </div>
                 
-                <input type="submit" value="Tallenna" class="btn btn-primary"></input>
+                <button type="submit" class="btn btn-primary btn-small">Tallenna</button> <!-- Pienennetty tallenna-painike -->
             </form>
         </div>
     </div>
 
-    <div class="logout-button"> <!-- Kirjaudu ulos -painike -->
+    <!-- Etusivu ja Kirjaudu ulos -painikkeet vierekkäin -->
+    <div class="top-buttons">
+        <a th:href="@{/home}" class="btn btn-primary">Etusivu</a> <!-- Etusivu-painike -->
         <form th:action="@{/logout}" method="post" class="d-inline">
             <button type="submit" class="btn btn-danger">Kirjaudu ulos</button>
         </form>
