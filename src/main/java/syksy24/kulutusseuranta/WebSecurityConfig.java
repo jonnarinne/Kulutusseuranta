@@ -43,6 +43,7 @@ public class WebSecurityConfig {
 			.defaultSuccessUrl("/home", true)
             .permitAll()
         )
+        .httpBasic(httpBasic -> {})
         .logout(logout -> logout
             .permitAll()
         )
