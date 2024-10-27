@@ -40,6 +40,7 @@
         #expensesPieChart {
             max-width: 400px; /* Kaavion leveys */
             margin: 20px auto; /* Keskitetään kaavio */
+            margin-top: 60px; /* Lisätty väli taulukon ja ympyrädiagrammin väliin */
         }
     </style>
 </head>
@@ -125,6 +126,22 @@
                         ],
                         borderWidth: 1
                     }]
+                },
+                options: {
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    const dataset = tooltipItem.dataset;
+                                    const total = dataset.data.reduce((sum, value) => sum + value, 0);
+                                    const value = dataset.data[tooltipItem.dataIndex];
+                                    const percentage = ((value / total) * 100).toFixed(2); // Prosentti kahden desimaalin tarkkuudella
+                                    const label = tooltipItem.label;
+                                    return `${label}: ${value} euroa (${percentage} %)`;
+                                }
+                            }
+                        }
+                    }
                 }
             });
         }
