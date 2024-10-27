@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
     <style>
+        /* Tyylitiedostot ja muut tyylit */
         .top-buttons {
             position: absolute;
             top: 20px;
@@ -35,6 +36,10 @@
         }
         tr:hover {
             background-color: #e9ecef; /* Rivien korostus hover-efektillä */
+        }
+        #expensesPieChart {
+            max-width: 400px; /* Kaavion leveys */
+            margin: 20px auto; /* Keskitetään kaavio */
         }
     </style>
 </head>
@@ -69,15 +74,102 @@
                     <td th:text="${expense.date}"></td>
                     <td th:text="${expense.location}"></td>
                     <td th:text="${expense.category.name}"></td>
-
                     <td sec:authorize="hasRole('ADMIN')">
-                        <a th:href="@{/delete/{id}(id=${expense.id})}" class="btn btn-danger btn-sm">Poista</a>
+                        <a th:href="@{/delete/{id}(id=${expense.id})}" class="btn btn-danger btn-sm" th:onclick="'updateChart()'">Poista</a>
                         <a th:href="@{/edit/{id}(id=${expense.id})}" class="btn btn-secondary btn-sm">Muokkaa</a>
                     </td>
                 </tr>
             </tbody>
         </table>
+
+        <!-- Ympyräkaavion canvas -->
+        <canvas id="expensesPieChart" width="400" height="400"></canvas>
     </div>
+
+    <!-- Chart.js-kirjaston script CDN:n kautta -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Muuttujat kaaviota varten
+        let expensesPieChart;
+        const ctx = document.getElementById('expensesPieChart').getContext('2d');
+
+        // Kategorioiden värit
+        const categoryColors = {
+            "Ruoka": 'rgba(255, 99, 132, 0.2)',
+            "Vuokra": 'rgba(54, 162, 235, 0.2)',
+            "Harrastukset": 'rgba(255, 206, 86, 0.2)',
+            "Vakuutukset": 'rgba(75, 192, 192, 0.2)',
+            "Matkustaminen": 'rgba(153, 102, 255, 0.2)',
+            "Sisustaminen": 'rgba(255, 159, 64, 0.2)',
+            "Viihde ja vapaa-aika": 'rgba(255, 205, 86, 0.2)',
+        };
+
+        // Alustetaan kaavio tyhjillä arvoilla
+        function initializeChart() {
+            expensesPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Kulutuksen jakautuminen',
+                        data: [],
+                        backgroundColor: [],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 205, 86, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                }
+            });
+        }
+
+        // Funktio kaavion päivittämiseen
+        function updateChart() {
+            const labels = [];
+            const data = [];
+            const categoryMap = {};
+
+            // Käy läpi taulukon ja kerää tiedot
+            document.querySelectorAll('tbody tr').forEach(row => {
+                const category = row.cells[4].innerText; // Kategoria
+                const amount = parseFloat(row.cells[1].innerText); // Summa
+
+                // Lisää summa kategoriaan
+                if (categoryMap[category]) {
+                    categoryMap[category] += amount;
+                } else {
+                    categoryMap[category] = amount;
+                }
+            });
+
+            // Muodosta kaavion data
+            for (const category in categoryMap) {
+                labels.push(category);
+                data.push(categoryMap[category]);
+            }
+
+            // Päivitetään kaavion data
+            expensesPieChart.data.labels = labels;
+            expensesPieChart.data.datasets[0].data = data;
+
+            // Asetetaan kullekin kategoriolle oma väri
+            expensesPieChart.data.datasets[0].backgroundColor = labels.map(label => categoryColors[label] || 'rgba(200, 200, 200, 0.2)');
+
+            expensesPieChart.update();
+        }
+
+        // Alustetaan kaavio sivun lataamisen yhteydessä
+        window.onload = function() {
+            initializeChart();
+            updateChart(); // Alustetaan kaavio ensimmäiselle lataukselle
+        };
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>

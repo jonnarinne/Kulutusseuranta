@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import syksy24.kulutusseuranta.domain.Expense;
 import syksy24.kulutusseuranta.domain.CategoryRepository;
 import syksy24.kulutusseuranta.domain.ExpenseRepository;
+import syksy24.kulutusseuranta.web.ExpenseService;
+
 
 
 @Controller
@@ -26,6 +28,9 @@ public class ExpenseController {
 
 	@Autowired
 	private ExpenseRepository expenseRepository;
+
+	@Autowired
+	private ExpenseService expenseService;
 
 	private static final Logger log = LoggerFactory.getLogger(ExpenseController.class);
 
