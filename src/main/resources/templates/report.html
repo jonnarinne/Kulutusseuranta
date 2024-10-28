@@ -73,7 +73,7 @@
                     <td th:text="${expense.name}"></td>
                     <td th:text="${expense.amount}"></td>
                     <td th:text="${expense.date}"></td>
-                    <td th:text="${expense.location}"></td>
+                    <td th:text="${expense.shop}"></td>
                     <td th:text="${expense.category.name}"></td>
                     <td sec:authorize="hasRole('ADMIN')">
                         <a th:href="@{/delete/{id}(id=${expense.id})}" class="btn btn-danger btn-sm" th:onclick="'updateChart()'">Poista</a>
@@ -96,13 +96,13 @@
 
         // Kategorioiden värit
         const categoryColors = {
-            "Ruoka": 'rgba(255, 99, 132, 0.2)',
-            "Vuokra": 'rgba(54, 162, 235, 0.2)',
-            "Harrastukset": 'rgba(255, 206, 86, 0.2)',
-            "Vakuutukset": 'rgba(75, 192, 192, 0.2)',
-            "Matkustaminen": 'rgba(153, 102, 255, 0.2)',
-            "Sisustaminen": 'rgba(255, 159, 64, 0.2)',
-            "Viihde ja vapaa-aika": 'rgba(255, 205, 86, 0.2)',
+            "Ruoka": 'rgba(255, 99, 132, 0.7)',          // Punainen
+            "Vuokra": 'rgba(54, 162, 235, 0.7)',         // Sininen
+            "Harrastukset": 'rgba(255, 206, 86, 0.7)',   // Keltainen
+            "Vakuutukset": 'rgba(75, 192, 192, 0.7)',    // Turkosi
+            "Matkustaminen": 'rgba(153, 102, 255, 0.7)', // Liila
+            "Sisustaminen": 'rgba(255, 159, 64, 0.7)',   // Oranssi
+            "Viihde ja vapaa-aika": 'rgba(102, 204, 0, 0.7)' // Vihreä
         };
 
         // Alustetaan kaavio tyhjillä arvoilla

@@ -8,6 +8,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
+
+
 @Entity
 public class Expense {
 
@@ -15,10 +19,16 @@ public class Expense {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Size(min=1, max=30)
     private String name;
+
+    @Min(value = 1, message = "Summan täytyy olla vähintään 1 euro")
     private double amount;
+
     private LocalDate date;
-    private String location;
+
+    @Size(min=1, max=30)
+    private String shop;
     
     @ManyToOne
     private Category category;
@@ -28,11 +38,11 @@ public class Expense {
 		super();
 	}
 
-    public Expense(String name, double amount, LocalDate date, String location, Category category) {
+    public Expense(String name, double amount, LocalDate date, String shop, Category category) {
         this.name = name;
         this.amount = amount;
         this.date = date;
-        this.location = location;
+        this.shop = shop;
         this.category = category;
     }
 
@@ -68,12 +78,12 @@ public class Expense {
         this.date = date;
     }
 
-    public String getLocation() {
-        return location;
+    public String getShop() {
+        return shop;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setShop(String shop) {
+        this.shop = shop;
     }
 
     public Category getCategory() {
@@ -86,7 +96,7 @@ public class Expense {
 
     @Override
     public String toString() {
-        return "Expense [name=" + name + ", amount=" + amount + ", date=" + date + ", location=" + location
+        return "Expense [name=" + name + ", amount=" + amount + ", date=" + date + ", shop=" + shop
                 + ", category=" + category + "]";
     } 
     

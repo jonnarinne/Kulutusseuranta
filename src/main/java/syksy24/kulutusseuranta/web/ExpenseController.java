@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import jakarta.validation.Valid;
+import java.util.Optional;
+import org.springframework.validation.BindingResult;
 
 
 import syksy24.kulutusseuranta.domain.Expense;
 import syksy24.kulutusseuranta.domain.CategoryRepository;
 import syksy24.kulutusseuranta.domain.ExpenseRepository;
-import syksy24.kulutusseuranta.web.ExpenseService;
 
 
 
@@ -28,9 +30,6 @@ public class ExpenseController {
 
 	@Autowired
 	private ExpenseRepository expenseRepository;
-
-	@Autowired
-	private ExpenseService expenseService;
 
 	private static final Logger log = LoggerFactory.getLogger(ExpenseController.class);
 
@@ -63,19 +62,27 @@ public class ExpenseController {
 	}
 
 	// Tallennetaan uusi kulu
-	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    @PostMapping("/saveAdd")
-	public String saveAdd(@ModelAttribute("expense") Expense expense) {
-		expenseRepository.save(expense);
-		return "redirect:report";
-	}
+	@PostMapping("/saveAdd")
+	public String saveAdd(@Valid @ModelAttribute("expense") Expense expense, BindingResult bindingResult, Model model) {
+    if (bindingResult.hasErrors()) {
+        model.addAttribute("categories", crepository.findAll());
+        return "add"; // Palautetaan lisäysnäkymään virheiden kanssa
+    }
+
+    expenseRepository.save(expense);
+    return "redirect:report";
+}
 
 	// Tallennetaan muokattu kulu
 	@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/saveEdit")
-	public String saveEdit(@ModelAttribute("expense") Expense expense) {
-		expenseRepository.save(expense);
-		return "redirect:report";
+	public String saveEdit(@Valid @ModelAttribute("expense") Expense expense, BindingResult bindingResult, Model model ) {
+	if (bindingResult.hasErrors()) {
+		model.addAttribute("categories", crepository.findAll());
+		return "edit"; // Palautetaan muokkausnäkymään virheiden kanssa
+	}
+	expenseRepository.save(expense);
+	return "redirect:report";
 	}
 
 	// Poistetaan kulu
@@ -89,12 +96,18 @@ public class ExpenseController {
 
 	// Muokataan kulua
 	@PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("edit/{id}")
+	@GetMapping("edit/{id}")
 	public String editExpense(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("expense", expenseRepository.findById(id));
-		model.addAttribute("categories", crepository.findAll());
-		return "edit";
+    	Optional<Expense> optionalExpense = expenseRepository.findById(id); // Hanki kulu Optionalina
+    	if (optionalExpense.isPresent()) {
+        	model.addAttribute("expense", optionalExpense.get()); // Lisää kulu malliin
+    	} else {
+        	// Käsittele tilanne, jossa kulua ei löydy
+        	return "redirect:/report"; // Ohjataan käyttäjä takaisin raporttinäkymään
+    	}
+    	model.addAttribute("categories", crepository.findAll()); // Lataa kategoriat
+    	return "edit"; // Näytä muokkausnäkymä
 	}
-    
+
 }
 
