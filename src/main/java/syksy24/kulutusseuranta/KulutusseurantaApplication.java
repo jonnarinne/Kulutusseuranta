@@ -51,16 +51,16 @@ public class KulutusseurantaApplication {
 
 
             log.info("Saving sample expenses");
-            expenseRepository.save(new Expense("Viikon ruokaostokset", 50.0, LocalDate.now(), "Prisma", food));
-            expenseRepository.save(new Expense("Vuokra", 800.0, LocalDate.now(), "-", rent));
-            expenseRepository.save(new Expense("Kuntosali", 30.0, LocalDate.now(), "Elixia", hobbies));
-            expenseRepository.save(new Expense("Elokuvalippu", 15.0, LocalDate.now(), "Finnkino", hobbies));
-            expenseRepository.save(new Expense("Uusi sohva", 600.0, LocalDate.now(), "IKEA", decorating));
-            expenseRepository.save(new Expense("Junalippu Tampereelle", 15.0, LocalDate.now(), "VR", travelling));
-            expenseRepository.save(new Expense("Konserttilippu", 49.90, LocalDate.now(), "Ticketmaster", freetime));
-            expenseRepository.save(new Expense("Junalippu Helsinkiin", 22.0, LocalDate.now(), "VR", travelling));
-            expenseRepository.save(new Expense("Välipalaostoksia", 4.95, LocalDate.now(), "Alepa", food));
-            expenseRepository.save(new Expense("Käynti uimahallissa", 5.0, LocalDate.now(), "VR", freetime));
+            expenseRepository.save(new Expense("Viikon ruokaostokset", 50.0, LocalDate.of(2024, 10, 1), "Prisma", food));
+            expenseRepository.save(new Expense("Vuokra", 800.0, LocalDate.of(2024, 10, 1), "-", rent));
+            expenseRepository.save(new Expense("Kuntosali", 30.0, LocalDate.of(2024, 10, 2), "Elixia", hobbies));
+            expenseRepository.save(new Expense("Elokuvalippu", 15.0, LocalDate.of(2024, 10, 3), "Finnkino", hobbies));
+            expenseRepository.save(new Expense("Uusi sohva", 600.0, LocalDate.of(2024, 10, 4), "IKEA", decorating));
+            expenseRepository.save(new Expense("Junalippu Tampereelle", 15.0, LocalDate.of(2024, 10, 5), "VR", travelling));
+            expenseRepository.save(new Expense("Konserttilippu", 49.90, LocalDate.of(2024, 10, 6), "Ticketmaster", freetime));
+            expenseRepository.save(new Expense("Junalippu Helsinkiin", 22.0, LocalDate.of(2024, 10, 7), "VR", travelling));
+            expenseRepository.save(new Expense("Välipalaostoksia", 4.95, LocalDate.of(2024, 10, 8), "Alepa", food));
+            expenseRepository.save(new Expense("Käynti uimahallissa", 5.0, LocalDate.of(2024, 10, 9), "VR", freetime));
 
             
             AppUser user1 = new AppUser("user", "$2a$10$GCNSYY8Rs9zV0YL0lainN.XBKOlq8/nB4Sf/voyCWKPzgSVupKIiW", "ROLE_USER");
