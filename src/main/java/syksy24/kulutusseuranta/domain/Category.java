@@ -1,45 +1,44 @@
 package syksy24.kulutusseuranta.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.util.List;
+import jakarta.persistence.*;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
+@Table(name="category")
 public class Category {
  
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	@NotNull
-	private Long categoryid;
+	private Long id;
 
+	@Column(name="name")
 	@Size(min=5, max=30)
 	private String name;
 
-	@OneToMany(mappedBy = "category") // Tämä kertoo, että tämä on monelle-toiseen suhde Expense-luokassa
+	@OneToMany(mappedBy = "category")
 	@JsonIgnore
-    private List<Expense> expenses; // Lista kuluista, jotka kuuluvat tähän kategoriaan
+    private List<Expense> expenses;
 	
 	public Category() {}
 	
-	public Category(String name) {
+	public Category(String name, List<Expense> expenses) {
 		super();
 		this.name = name;
 	}
 	
-	public Long getCategoryid() {
-		return categoryid;
+	public Long getId() {
+		return id;
 	}
 	
-	public void setCategoryid(Long categoryid) {
-		this.categoryid = categoryid;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	public String getName() {
@@ -50,8 +49,18 @@ public class Category {
 		this.name = name;
 	}
 
+	public List<Expense> getExpenses() {
+		return expenses;
+	}
+
+	public void setCars(List<Expense> expenses) {
+		this.expenses = expenses;
+	}
+
 	@Override
 	public String toString() {
-		return "Category [categoryid=" + categoryid + ", name=" + name + "]";
+		return "Category [id=" + id + ", name=" + name + "]";
 	}
+
+
 }

@@ -2,35 +2,38 @@ package syksy24.kulutusseuranta.domain;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
 
 @Entity
+@Table(name="expense")
 public class Expense {
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 
+    @Column(name="name")
 	@Size(min=1, max=30)
     private String name;
 
+    @Column(name="amount")
     @Min(value = 1, message = "Summan täytyy olla vähintään 1 euro")
     private double amount;
 
+    @Column(name="date")
     private LocalDate date;
 
+    @Column(name="shop")
     @Size(min=1, max=30)
     private String shop;
     
     @ManyToOne
+    @JoinColumn(name = "categoryid")
     private Category category;
 
 
@@ -96,8 +99,9 @@ public class Expense {
 
     @Override
     public String toString() {
-        return "Expense [name=" + name + ", amount=" + amount + ", date=" + date + ", shop=" + shop
+        return "Expense [id=" + id + ", name=" + name + ", amount=" + amount + ", date=" + date + ", shop=" + shop
                 + ", category=" + category + "]";
-    } 
+    }
+
     
 }

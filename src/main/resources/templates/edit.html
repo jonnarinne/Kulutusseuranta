@@ -72,7 +72,7 @@
                     <label for="categorylist">Kategoria</label>
                     <select id="categorylist" th:field="*{category}" class="form-control" th:class="${#fields.hasErrors('category')} ? 'is-invalid' : ''" required>
                         <option value="" disabled selected>Valitse kategoria</option>
-                        <option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
+                        <option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
                     </select>
                 </div>
 
