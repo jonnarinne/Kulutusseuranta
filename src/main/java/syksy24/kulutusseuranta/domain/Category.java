@@ -27,10 +27,15 @@ public class Category {
     private List<Expense> expenses;
 	
 	public Category() {}
+
+	public Category(String name) {
+        this.name = name;
+    }
 	
 	public Category(String name, List<Expense> expenses) {
 		super();
 		this.name = name;
+		this.expenses = expenses;
 	}
 	
 	public Long getId() {
@@ -53,7 +58,7 @@ public class Category {
 		return expenses;
 	}
 
-	public void setCars(List<Expense> expenses) {
+	public void setExpenses(List<Expense> expenses) {
 		this.expenses = expenses;
 	}
 

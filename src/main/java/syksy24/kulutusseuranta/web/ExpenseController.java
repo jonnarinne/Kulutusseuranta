@@ -66,7 +66,7 @@ public class ExpenseController {
 	public String saveAdd(@Valid @ModelAttribute("expense") Expense expense, BindingResult bindingResult, Model model) {
     if (bindingResult.hasErrors()) {
         model.addAttribute("categories", crepository.findAll());
-        return "add"; // Palautetaan lisäysnäkymään virheiden kanssa
+        return "add"; 
     }
 
     expenseRepository.save(expense);
@@ -79,7 +79,7 @@ public class ExpenseController {
 	public String saveEdit(@Valid @ModelAttribute("expense") Expense expense, BindingResult bindingResult, Model model ) {
 	if (bindingResult.hasErrors()) {
 		model.addAttribute("categories", crepository.findAll());
-		return "edit"; // Palautetaan muokkausnäkymään virheiden kanssa
+		return "edit";
 	}
 	expenseRepository.save(expense);
 	return "redirect:report";
@@ -98,15 +98,15 @@ public class ExpenseController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("edit/{id}")
 	public String editExpense(@PathVariable("id") Long id, Model model) {
-    	Optional<Expense> optionalExpense = expenseRepository.findById(id); // Hanki kulu Optionalina
+    	Optional<Expense> optionalExpense = expenseRepository.findById(id); 
     	if (optionalExpense.isPresent()) {
-        	model.addAttribute("expense", optionalExpense.get()); // Lisää kulu malliin
+        	model.addAttribute("expense", optionalExpense.get());
     	} else {
-        	// Käsittele tilanne, jossa kulua ei löydy
-        	return "redirect:/report"; // Ohjataan käyttäjä takaisin raporttinäkymään
+        	
+        	return "redirect:/report";
     	}
-    	model.addAttribute("categories", crepository.findAll()); // Lataa kategoriat
-    	return "edit"; // Näytä muokkausnäkymä
+    	model.addAttribute("categories", crepository.findAll()); 
+    	return "edit";
 	}
 
 }

@@ -4,25 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kulutusseurantajärjestelmä</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!-- Bootstrap-tuki -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa; /* Vaaleanharmaa tausta */
+            background-color: #f8f9fa;
         }
         .container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Keskitetään koko näkymä */
+            min-height: 100vh;
         }
         header {
-            margin-bottom: 30px; /* Vähennetään marginaalia */
+            margin-bottom: 30px;
         }
         .logout-button {
-            position: absolute; /* Asetetaan painike absoluuttisesti */
-            top: 20px; /* Etäisyys ylhäältä */
-            right: 20px; /* Etäisyys oikealta */
+            position: absolute;
+            top: 20px; 
+            right: 20px; 
         }
     </style>
 </head>
@@ -32,20 +32,20 @@
             <h1>Tervetuloa Kulutusseurantajärjestelmään</h1>
         </header>
 
-        <div class="text-center mb-4"> <!-- Keskitetään painikkeet ja lisätään marginaalia -->
+        <div class="text-center mb-4">
             <a class="btn btn-primary mx-2" href="/add">Lisää kulu</a>
             <a class="btn btn-secondary mx-2" href="/report">Näytä kulut</a>
         </div>
     </div>
 
-    <div class="logout-button"> <!-- Kirjaudu ulos -painike -->
-        <form th:action="@{/logout}" method="post" class="d-inline"> <!-- d-inline luokka säilyttää rivin -->
-            <button type="submit" class="btn btn-danger">Kirjaudu ulos</button> <!-- Bootstrap-painike -->
+    <div class="logout-button">
+        <form th:action="@{/logout}" method="post" class="d-inline">
+            <button type="submit" class="btn btn-danger">Kirjaudu ulos</button>
         </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

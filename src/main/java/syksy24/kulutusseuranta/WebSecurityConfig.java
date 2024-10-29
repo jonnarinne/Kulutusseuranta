@@ -25,18 +25,17 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
-        // Määritellään, mitkä pyynnöt ovat sallittuja
         .authorizeHttpRequests(authorize -> authorize
-			.requestMatchers(antMatcher("/h2-console/**")).permitAll() // H2-konsolille vapaa pääsy
-            .requestMatchers("/css/**").permitAll() // Salli CSS
-			.requestMatchers("/signup").permitAll() // Vapaa pääsy rekisteröitymissivulle
-			.requestMatchers("/saveuser").permitAll() // Vapaa pääsy käyttäjän tallentamiseen
-			.requestMatchers("/add").hasAnyRole("USER", "ADMIN") // Sekä admin että user voivat käyttää /add-polkua
-			.requestMatchers("/report").hasAnyRole("USER", "ADMIN") // Sekä admin että user voivat nähdä raportin
-			.requestMatchers("/home").authenticated() // Vain kirjautuneet käyttäjät voivat nähdä etusivun
-			.requestMatchers("/edit/**").hasRole("ADMIN") // Vain admin voi muokata
-			.requestMatchers("/delete/**").hasRole("ADMIN") // Vain admin voi poistaa
-			.anyRequest().authenticated() // Kaikki muut pyynnöt vaativat autentikoinnin
+			.requestMatchers(antMatcher("/h2-console/**")).permitAll()
+            .requestMatchers("/css/**").permitAll() 
+			.requestMatchers("/signup").permitAll() 
+			.requestMatchers("/saveuser").permitAll()
+			.requestMatchers("/add").hasAnyRole("USER", "ADMIN") 
+			.requestMatchers("/report").hasAnyRole("USER", "ADMIN") 
+			.requestMatchers("/home").authenticated() 
+			.requestMatchers("/edit/**").hasRole("ADMIN") 
+			.requestMatchers("/delete/**").hasRole("ADMIN") 
+			.anyRequest().authenticated() 
         )
         .formLogin(form -> form
             .loginPage("/login")
@@ -48,16 +47,14 @@ public class WebSecurityConfig {
             .permitAll()
         )
         .csrf(csrf -> csrf
-            // CSRF:n poistaminen POSTMAN-kutsuille (API testaus) tietyiltä poluilta
-            .ignoringRequestMatchers("/expense/**") // Ei CSRF-suojausta näille poluille
+            .ignoringRequestMatchers("/expense/**") 
         )
         .headers(headers -> headers
-            .frameOptions(frameOptions -> frameOptions.disable()) // H2-konsoli iframe-ongelman korjaus
+            .frameOptions(frameOptions -> frameOptions.disable()) 
         );
 
     return http.build();
 }
-
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
