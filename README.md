@@ -1,6 +1,7 @@
 # Kulutusseuranta
 
-Tämä ohjelmointiprojekti on toteutettu Backend ohjelmointi-kurssin lopputyönä Haaga-Helia ammattikorkeakoulussa.
+Tämä ohjelmointiprojekti on toteutettu Backend ohjelmointi-kurssin lopputyönä Haaga-Helia ammattikorkeakoulussa. Työn aiheena on kulutusseurantajärjestelmä, jossa käyttäjä
+voi tarkastella omaa kulutustaan ja kulujen jakautumista eri kategorioihin.
 
 ## Toiminnallisuudet
 - Käyttäjien hallinta ja todennus: rekisteröinti- ja kirjautumissivu.
@@ -9,6 +10,7 @@ Tämä ohjelmointiprojekti on toteutettu Backend ohjelmointi-kurssin lopputyön�
 - Käyttäjän tiedot tallennetaan ulkoiseen tietokantaan (PostgreSQL).
 - Kulut on esitetty sekä taulukossa että ympyrädiagrammissa, josta käyttäjä voi tarkastella kulujen
   jakautumista kategorioittain.
+- Jokainen käyttäjä voi nähdä vain omat tietonsa.
 
 ## Käytetyt teknologiat
 - Spring Boot
@@ -18,4 +20,5 @@ Tämä ohjelmointiprojekti on toteutettu Backend ohjelmointi-kurssin lopputyön�
 - Thymeleaf
 
 ## Kuvia
+
 
