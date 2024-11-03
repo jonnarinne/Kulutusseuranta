@@ -7,7 +7,8 @@
 - Peruskäyttäjä voi lisätä kuluja ja nähdä lisäämänsä kulut.
 - Admin-käyttäjä voi lisätä, poistaa ja muokata kuluja sekä nähdä lisäämänsä kulut (CRUD).
 - Käyttäjän tiedot tallennetaan ulkoiseen tietokantaan (PostgreSQL).
-- 
+- Kulut on esitetty sekä taulukossa että ympyrädiagrammissa, josta käyttäjä voi tarkastella kulujen
+  jakautumista kategorioittain.
 
 ## Käytetyt teknologiat
 - Spring Boot
