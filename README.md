@@ -13,7 +13,7 @@
 - Spring Boot
 - PostgreSQL
 - Java
-- JavaScript
+- HTML
 - Thymeleaf
 
 ## Kuvia
