@@ -1,6 +1,6 @@
 # Kulutusseuranta
 
-
+Tämä ohjelmointiprojekti on toteutettu Backend ohjelmointi-kurssin lopputyönä Haaga-Helia ammattikorkeakoulussa.
 
 ## Toiminnallisuudet
 - Käyttäjien hallinta ja todennus: rekisteröinti- ja kirjautumissivu.
