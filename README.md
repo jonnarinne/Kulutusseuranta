@@ -21,4 +21,6 @@ voi tarkastella omaa kulutustaan ja kulujen jakautumista eri kategorioihin.
 
 ## Kuvia
 
+<img src="kuvat/rekisteroidy.png" alt="Rekisteröidy" width="500"/>
+
 
