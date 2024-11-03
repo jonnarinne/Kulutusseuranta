@@ -21,11 +21,14 @@ voi tarkastella omaa kulutustaan ja kulujen jakautumista eri kategorioihin.
 
 ## Kuvia
 
-![Rekisteröidy](images/rekisteroidy.png)
-![Rekisteröidy](images/rekisteroidy.png)
-![Rekisteröidy](images/rekisteroidy.png)
-![Rekisteröidy](images/rekisteroidy.png)
-![Rekisteröidy](images/rekisteroidy.png)
+![Rekisteröidy](images/rekisteroidy.PNG)
+![Rekisteröidy](images/kirjaudutaan.PNG)
+![Rekisteröidy](images/home.PNG)
+![Rekisteröidy](images/kuluttaja.PNG)
+![Rekisteröidy](images/lisätään.PNG)
+![Rekisteröidy](images/adminkulut.PNG)
+![Rekisteröidy](images/muokkaa.PNG)
+
 
 
 
