@@ -11,8 +11,10 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 
 import syksy24.kulutusseuranta.domain.Expense;
+import syksy24.kulutusseuranta.domain.AppUser;
 import syksy24.kulutusseuranta.domain.CategoryRepository;
 import syksy24.kulutusseuranta.domain.ExpenseRepository;
+import syksy24.kulutusseuranta.domain.AppUserRepository;
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -24,16 +26,29 @@ public class ExpenseRepositoryTest {
     @Autowired
     private CategoryRepository crepository;
 
+    @Autowired
+    private AppUserRepository appuserRepository;
+
     // Testi, joka tarkistaa kulun lisäämisen tietokantaan
     @Test
-    public void createNewExpense() {;
-        LocalDate date = LocalDate.parse("2024-10-01");
-        Expense expense = new Expense("Junalippu", 50.0, date, "VR", crepository.findByName("Matkustaminen").get(0));
-        expenseRepository.save(expense);
-        
-        // Varmistetaan, että kululle on luotu id
-        assertThat(expense.getId()).isNotNull();
-    }
+    public void createNewExpense() {
+    // Luo tai hae testikäyttäjä
+    AppUser testUser = new AppUser("testuser", "hashedPassword", "USER");
+    appuserRepository.save(testUser); // Tallenna käyttäjä tietokantaan, jos ei ole vielä olemassa
+
+    LocalDate date = LocalDate.parse("2024-10-01");
+
+    // Luo uusi Expense, liitä testikäyttäjä
+    Expense expense = new Expense("Junalippu", 50.0, date, "VR", crepository.findByName("Matkustaminen").get(0), testUser);
+    expenseRepository.save(expense);
+    
+    // Varmistetaan, että kululle on luotu id
+    assertThat(expense.getId()).isNotNull();
+    
+    // Varmista, että kulu liittyy oikeaan käyttäjään
+    assertThat(expense.getAppuser()).isEqualTo(testUser);
+}
+
 
     // Testi, joka tarkistaa kulun noutamisen tietokannasta kulun nimen perusteella
     @Test

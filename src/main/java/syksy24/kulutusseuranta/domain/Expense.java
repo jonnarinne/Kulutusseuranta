@@ -36,17 +36,22 @@ public class Expense {
     @JoinColumn(name = "categoryid")
     private Category category;
 
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    private AppUser appuser;
+
 
     public Expense() {
 		super();
 	}
 
-    public Expense(String name, double amount, LocalDate date, String shop, Category category) {
+    public Expense(String name, double amount, LocalDate date, String shop, Category category, AppUser appuser) {
         this.name = name;
         this.amount = amount;
         this.date = date;
         this.shop = shop;
         this.category = category;
+        this.appuser = appuser;
     }
 
     public long getId() {
@@ -97,11 +102,18 @@ public class Expense {
         this.category = category;
     }
 
+    public AppUser getAppuser() {
+        return appuser;
+    }
+
+    public void setAppuser(AppUser appuser) {
+        this.appuser = appuser;
+    }
+
     @Override
     public String toString() {
         return "Expense [id=" + id + ", name=" + name + ", amount=" + amount + ", date=" + date + ", shop=" + shop
-                + ", category=" + category + "]";
+                + ", category=" + category + ", appuser=" + appuser + "]";
     }
-
     
 }

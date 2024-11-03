@@ -29,7 +29,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>Tervetuloa Kulutusseurantajärjestelmään</h1>
+            <!-- Tervetulotoivotus kirjautuneen käyttäjän nimellä -->
+            <h1 th:text="'Tervetuloa Kulutusseurantaan, ' + ${username} + '!'">Tervetuloa Kulutusseurantaan!</h1>
         </header>
 
         <div class="text-center mb-4">
