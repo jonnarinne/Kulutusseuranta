@@ -49,16 +49,19 @@ ympyrädiagrammin eri sektoreiden päälle, näytölle ilmestyy kunkin kategoria
 
 ![Rekisteröidy](images/lisätään.PNG)
 <p></p>
+Käyttäjä pääsee kulujen lisäysnäkymään sekä etusivulta että kulujen listaussivulta.
 <p></p>
 
 
 ![Rekisteröidy](images/admininkulut.PNG)
 <p></p>
+Admin voi poistaa ja muokata omia kulujansa. Poista- ja muokkaa-painikkeet löytyvät taulukosta.
 <p></p>
 
 
 ![Rekisteröidy](images/muokkaa.PNG)
 <p></p>
+Vain admin pystyy muokkaamaan omien kulujensa tietoja.
 <p></p>
 
 
