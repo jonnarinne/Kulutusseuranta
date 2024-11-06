@@ -41,8 +41,9 @@ Kirjautumisen jälkeen käyttäjä pääsee etusivulle, josta hän voi siirtyä 
 
 ![Rekisteröidy](images/kuluttajakulut.PNG)
 <p></p>
-Kulunäkymässä käyttäjä voi tarkastella lisättyjä kuluja sekä taulukon että ympyrädiagrammin muodossa. Kuluista voidaan kirjata seuraavat tiedot: kulun nimi, päivämäärä,
-summa ja ostopaikka.
+Kulunäkymässä käyttäjä voi tarkastella lisättyjä kuluja sekä taulukon että ympyrädiagrammin muodossa. Kuluista voidaan kirjata seuraavat tiedot: kulun nimi, summa,
+päivämäärä, ostopaikka ja kategoria. Taulukon alapuolella olevasta ympyrädiagrammista käyttäjä voi tarkastella kulujen jakautumista kategorioittain. Kun käyttäjä vie hiiren 
+ympyrädiagrammin eri sektoreiden päälle, näytölle ilmestyy kunkin kategorian kulutusmäärä sekä sen osuus kokonaiskulutuksesta.
 <p></p>
 
 
