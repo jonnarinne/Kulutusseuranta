@@ -23,7 +23,8 @@ voi tarkastella omaa kulutustaan ja kulujen jakautumista eri kategorioihin.
 
 ![Rekisteröidy](images/rekisteroidy.PNG)
 <p></p>
-
+Käyttäjän tulee rekisteröityä voidakseen lisätä kuluja järjestelmään. Jokaisella käyttäjällä on oma uniikki käyttäjätunnus ja salasana. Käyttäjä saa
+ilmoituksen, mikäli käyttäjätunnus on jo varattu.
 
 ![Rekisteröidy](images/kirjaudu.PNG)
 <p></p>
